@@ -1,0 +1,44 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()" id="menuIcon" aria-label="Toggle menu">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span id="menuTitle">Sky Care Hospital</span>
+    <a mat-button routerLink="/" class="top-menu-item"><mat-icon>home</mat-icon>Home</a>
+    <a mat-button routerLink="/form" class="top-menu-item"><mat-icon>people</mat-icon>Registration Form</a>
+    <a mat-button routerLink="/purpose" class="top-menu-item"><mat-icon>how_to_reg</mat-icon>Purpose of visit</a>
+    <a mat-button routerLink="/patientlist" class="top-menu-item"><mat-icon>person_add</mat-icon>Patient List</a>
+    <a mat-button routerLink="/report" class="top-menu-item"><mat-icon> insert_chart_outlined</mat-icon>Report</a>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [fixedInViewport]="true" [fixedTopGap]="60" mode="side">
+        <div class="side-nav-items">
+            <div>
+                <a (click)="sidenav.close()" mat-button routerLink="/"
+                    class="side-menu-item"><mat-icon>home</mat-icon>Home</a>
+            </div>
+            <div>
+                <a (click)="sidenav.close()" mat-button routerLink="/form"
+                    class="side-menu-item" style="white-space: nowrap;"><mat-icon>people</mat-icon>Registration Form</a>
+            </div>
+            <div>
+                <a (click)="sidenav.close()" mat-button routerLink="/purpose"
+                    class="side-menu-item"><mat-icon>how_to_reg</mat-icon>Purpose of visit</a>
+            </div>
+            <div>
+                <a (click)="sidenav.close()" mat-button routerLink="/patientlist"
+                    class="side-menu-item"><mat-icon>person_add</mat-icon>Patient List</a>
+            </div>
+            <div>
+                <a (click)="sidenav.close()" mat-button routerLink="/report"
+                    class="side-menu-item"><mat-icon> insert_chart_outlined</mat-icon>Report</a>
+            </div>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <div class="main-content">
+            <!-- <router-outlet></router-outlet> -->
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

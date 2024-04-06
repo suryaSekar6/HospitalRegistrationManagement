@@ -1,0 +1,72 @@
+<!-- report.component.html -->
+<div class="report">
+  <!-- Form -->
+  <div class="outercontainer">
+    <h1 id="text-22-600-22-Inter" style="color: #474747; padding-bottom: 20px;">Reports</h1>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="regno" id="text-14-500-22-Inter" style="padding-bottom: 10px;">Registration No</label>
+          <input type="text" class="form-control" id="regno" [(ngModel)]="formData.reg_no" />
+        </div>
+        <div class="form-group">
+          <label for="fromDate" id="text-14-500-22-Inter" style="padding-bottom: 10px;">From date</label>
+          <input type="date" class="form-control" id="fromDate" [(ngModel)]="formData.from_date" />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="patientname" id="text-14-500-22-Inter" style="padding-bottom: 10px;">Patient Name</label>
+          <input type="text" class="form-control" id="patientname" [(ngModel)]="formData.firstname" />
+        </div>
+        <div class="form-group">
+          <label for="toDate" id="text-14-500-22-Inter" style="padding-bottom: 10px;">To date</label>
+          <input type="date" class="form-control" id="toDate" [(ngModel)]="formData.to_date" />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="mobno" id="text-14-500-22-Inter" style="padding-bottom: 10px;">Mobile No</label>
+          <input type="number" class="form-control" id="mobno" [(ngModel)]="formData.mobilenumber" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <button class="btn btn-primary" (click)="generateReport()">
+          GENERATE REPORT
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tableContainer" class="mt-5" *ngIf="showTable">
+    <table class="table">
+      <thead style="border: solid #2F70CB 2px;">
+        <tr>
+          <th>Registration No</th>
+          <th>Patient Name</th>
+          <th>Gender</th>
+          <th>Mobile No</th>
+          <th>Created At</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="reportData && reportData.data && reportData.data.length > 0">
+        <tr *ngFor="let patient of reportData.data">
+          <td>{{ patient.reg_no }}</td>
+          <td>{{ patient.firstname }}</td>
+          <td>{{ patient.gender }}</td>
+          <td>{{ patient.mobilenumber }}</td>
+          <td>{{ patient.created_at }}</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="reportData && reportData.message">
+        <tr>
+          <td colspan="5" class="centered-cell">{{ reportData.message }}</td>
+        </tr>
+      </tbody>     
+    </table>
+  </div>
+  
+
+</div>

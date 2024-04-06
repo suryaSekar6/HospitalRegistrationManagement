@@ -1,0 +1,211 @@
+<div class="abovecontent">
+  <div class="row">
+    <div class="col-md-4">
+      <form class="d-flex">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="col-md-8" style="display: flex; justify-content: end">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-bs-dismiss="modal"
+        style="display: flex; align-items: center; justify-content: center"
+      >
+        <mat-icon>assessment</mat-icon> Print all
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-left: 2%;
+        "
+        routerLink="/form"
+      >
+        <mat-icon>add</mat-icon> Add New
+      </button>
+    </div>
+  </div>
+</div>
+<div class="outertable">
+  <table class="table" id="dynamicTable">
+    <thead>
+      <tr>
+        <th scope="col">#RegNo</th>
+        <th scope="col">Mr/Mrs</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Mobile No</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let patient of data">
+        <tr>
+          <td>{{ patient.reg_no }}</td>
+          <td>{{ patient.prefix }}</td>
+          <td>{{ patient.firstname }}</td>
+          <td>{{ patient.lastname }}</td>
+          <td>{{ patient.mobilenumber }}</td>
+          <td>{{ patient.gender }}</td>
+          <td>
+            <mat-icon
+              style="cursor: pointer"
+              data-bs-toggle="modal"
+              data-bs-target="#editpopupmodal"
+              (click)="openModal(patient)"
+              >create</mat-icon
+            >
+            <mat-icon
+              style="cursor: pointer"
+              (click)="openDeleteModal(patient)"
+              data-bs-toggle="modal"
+              data-bs-target="#deletepopupmodal"
+              >delete</mat-icon
+            >
+            <mat-icon style="cursor: pointer">visibility</mat-icon>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+<!-- Edit Modal -->
+<div
+  class="modal fade"
+  id="editpopupmodal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Edit Form</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Bind form fields to selectedRow data -->
+        <div class="row">
+          <div class="col-md-12">
+            <label>Mr/Mrs :</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="selectedRow.prefix"
+            />
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-md-12">
+            <label>First Name :</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="selectedRow.firstname"
+            />
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-md-12">
+            <label>Last Name :</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="selectedRow.lastname"
+            />
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-md-12">
+            <label>Mobile no :</label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="selectedRow.mobilenumber"
+            />
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-md-12">
+            <label>Gender :</label>
+            <select class="form-select" [(ngModel)]="selectedRow.gender">
+              <option selected>Open this select menu</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Not willing to disclose</option>
+            </select>
+          </div>
+        </div>
+        <br />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="saveChanges()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Delete Modal -->
+<div
+  class="modal fade"
+  id="deletepopupmodal"
+  [class.show]="deleteModalVisible"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Delete Record</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <label>Are you sure want to delete this record?</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="confirmDelete()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
